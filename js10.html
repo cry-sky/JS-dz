@@ -1,0 +1,64 @@
+Потомки
+<ul id="elem">
+ 	<li>пункт 1</li>
+  	<li>пункт 2</li>
+ 	<li>пункт 3</li>
+</ul>
+
+Сосіди
+
+<ul>
+	<li>пункт 1</li>
+	<li id="elem1">пункт 2</li>
+	<li>пункт 3</li>
+</ul>
+
+<ul>
+<li id="elem3">пункт 1</li>
+<li>пункт 2</li>
+<li>пункт 3</li>
+</ul>
+
+Батьки
+
+<p>
+Текст родителя <span id="elem4">потомок</span>
+</p>
+
+
+<div>
+<p>Lorem ipsum dolor sit amet.</p>
+<p>Lorem ipsum dolor sit amet.<span id="elem5">потомок</span></p>
+</div>
+
+
+
+
+<script type="text/javascript">
+
+// Потомки
+
+	let val1= document.querySelector("#elem").firstElementChild.style.color = 'red';
+	let val2= document.querySelector("#elem").lastElementChild.style.color = 'red';
+	let val3= document.querySelector("#elem").children[0].innerHTML+=" !";
+	let val4= document.querySelector("#elem").children[1].innerHTML+=" !";
+	let val5= document.querySelector("#elem").children[2].innerHTML+=" !";
+	// let val3= document.querySelector("#elem").children;
+	// for(let i=0;i<val3.length;i++){
+	// 	val3=val3[i].innerHTML+=' !';
+	// 	console.log(i);
+	// }
+
+// Сосіди
+
+	let val6=document.querySelector("#elem1").previousElementSibling.innerHTML+=" !";
+	let val7=document.querySelector("#elem1").nextElementSibling.innerHTML+=" !";
+	let val8=document.querySelector("#elem3").nextElementSibling.nextElementSibling.innerHTML+=" !";
+
+// Батьки
+	
+	let val9=document.querySelector("#elem4").parentElement.style.color = 'red';
+	let val11=document.querySelector("#elem5").parentElement.parentElement.style.color = 'red';
+
+	console.log(val9);
+</script>
