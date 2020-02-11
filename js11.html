@@ -1,0 +1,176 @@
+<style type="text/css">
+	#overflow{
+		background-color: rgba(0,0,0,.5);
+		position: fixed;
+		top: 0;right: 0;bottom: 0;left: 0;
+		z-index: 10;
+		display: none;
+	}
+	#modal{
+		position: fixed;
+		top: 50%;left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 15;
+		display: none;
+	}
+	.ligth li:nth-child(1)[class="l-on"]{
+		background-color: green;
+		box-shadow: 0 0 15px green;
+	}
+	.ligth li:nth-child(2)[class="l-on"]{
+		background-color: yellow;
+		box-shadow: 0 0 15px yellow
+	}
+	.ligth li:nth-child(3)[class="l-on"]{
+		background-color: red;
+		box-shadow: 0 0 15px red;
+	}
+	.l-off{
+		background-color: gray;
+	}
+	.mystyle{
+		background-color: red;
+	}
+    .tooltip {
+      position: fixed;
+      padding: 10px 20px;
+      border: 1px solid silver;
+      color: #fff;
+      background: purple;
+    }
+</style>
+
+<!-- 1 -->
+
+<div style="width: 500px; margin: 50px auto;">
+	<input type="text" class="nonnum" style="width: 100%; text-align: center; border-radius: 3px; border: solid 1px silver; padding: 3px" placeholder="Задача 1">
+</div>
+
+<!-- 2 -->
+
+<div style="width: 500px; margin: 50px auto;">
+	<button style="display: block; width: 20%; margin: 0 auto; border-radius: 3px; border: solid 1px silver; padding: 3px" onclick="show('block')">Задача 2</button>
+</div>
+<div id="overflow" onclick="show('none')"></div>
+<div id="modal" style="width: 50%; margin:0 auto; background-color: silver; border-radius: 3px">
+	<h2 style="margin: 10px; text-align: center;">Задача 2</h2>
+	<div style="height: 2px; background-color: gray; margin: 10px"></div>
+	<button style="display: block; width: 100px; margin: 10px auto;border-radius: 3px; border: solid 1px silver; padding: 3px" onclick="show('none')">Вихід</button>
+</div>
+
+<!-- 3 -->
+
+<div style="width: 800px; height: 500px; margin: 0 auto; background-color: green; position: relative;">
+	<div id="field" style="position: absolute;top: 5%;bottom: 5%;left: 5%; right: 5%; border: solid 3px #fff;">
+		<div style="width: 3px;height: 100%; margin: 0 auto; background-color: #fff;"></div>
+	</div>
+	<div id="ball" style="width: 50px; height: 50px; border-radius: 50%; background-color: #fff; box-shadow: inset 1px 1px 10px rgba(0,0,0,1);z-index: 1; transition: 1s; position: absolute; top: 100px; left: 100px; transform: translate(-50% -50%);"></div>
+</div>
+
+<!-- 4 -->
+
+<div style="width: 380px; margin: 0 auto;">
+	<ul class="ligth">
+		<li class="l-on" style="width: 100px; height: 100px; border-radius: 50%;list-style: none;margin: 5px; display: inline-block;"></li>
+		<li class="l-off" style="width: 100px; height: 100px; border-radius: 50%;list-style: none;margin: 5px; display: inline-block;"></li>
+		<li class="l-off" style="width: 100px; height: 100px; border-radius: 50%;list-style: none;margin: 5px; display: inline-block;"></li>
+	</ul>
+	<button class="active" style="display: block; width: 100px;border-radius: 3px; border: solid 1px silver;padding: 3px; margin: 5px auto">Задача 4</button>
+</div>
+
+<!-- 5 -->
+
+<div  style="width: 60%;margin: 20px auto">
+	<h4 style="text-align: center; margin: 5px;">Задача 5</h4>
+	<ul id="books">
+		<li style="padding: 5px; border-bottom: solid 1px silver; list-style: none;">Книга 1: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias veritatis culpa fugit tempore debitis, quo.</li>
+		<li style="padding: 5px; border-bottom: solid 1px silver; list-style: none;">Книга 2: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem eligendi sit, corporis id recusandae, quam.</li>
+		<li style="padding: 5px; border-bottom: solid 1px silver; list-style: none;">Книга 3: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit voluptatibus vel cumque voluptate, nemo optio?</li>
+		<li style="padding: 5px; border-bottom: solid 1px silver; list-style: none;">Книга 4: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas nobis temporibus tenetur accusamus magni rem.</li>
+		<li style="padding: 5px; border-bottom: solid 1px silver; list-style: none;">Книга 5: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde beatae atque dolorum, impedit provident, veritatis!</li>
+	</ul>
+</div>
+
+<!-- 6 -->
+
+<div style="padding: 20px;" id="tooltip">
+	<h4 style="text-align: center; margin:20px;">Задача 6</h4>
+	<button data-tooltip="підказка на кнопці 1" style="display: block; width: 100px;border-radius: 3px; border: solid 1px silver;padding: 3px; margin: 5px auto">1</button>
+	<button data-tooltip="підказка на кнопці 2" style="display: block; width: 100px;border-radius: 3px; border: solid 1px silver;padding: 3px; margin: 5px auto">2</button>
+
+</div>
+
+<script type="text/javascript">
+
+// 1
+
+	let nn=document.querySelector('.nonnum').onkeypress = function(event){
+		console.log(event.keyCode);	
+		if(event.keyCode >=47 && event.keyCode<=57){
+			event.preventDefault();
+		}		
+	}
+
+// 2
+
+	let show=function(state){
+		document.getElementById('modal').style.display=state;
+		document.getElementById('overflow').style.display=state;
+	}
+	
+// 3
+	document.querySelector('#field').onclick = function(e){
+		let fieldCoords = this.getBoundingClientRect();
+		let ballX=document.querySelector('#ball').style.left = event.clientX - fieldCoords.left - field.clientLeft - ball.offsetWidth/2;
+		let ballY=document.querySelector('#ball').style.top = event.clientY - fieldCoords.top - field.clientTop - ball.offsetHeight/2;
+		console.log(ballY,ballX);
+}
+
+// 4
+
+let ligth=document.querySelector('.ligth').children;
+let c=0;
+let active=document.querySelector('.active').onclick=function(event){
+	c++
+	if(c>=3){
+		c=0;
+	}
+	ligth[0].className='l-off'
+	ligth[1].className='l-off'
+	ligth[2].className='l-off'
+	ligth[c].className ="l-on"
+}
+
+// 5
+
+let btn=document.querySelector('#books').onclick=function(event){
+	let target = event.target.classList.toggle('mystyle')
+}
+
+// 6
+
+    document.onmouseover = function(event) {
+      let target = event.target;
+      let tooltipHtml = target.dataset.tooltip;
+      if (!tooltipHtml) return;
+      tooltipElem = document.createElement('div');
+      tooltipElem.className = 'tooltip';
+      tooltipElem.innerHTML = tooltipHtml;
+      document.body.append(tooltipElem);
+      let coords = target.getBoundingClientRect();
+      let left = coords.left + (target.offsetWidth - tooltipElem.offsetWidth) / 2;
+      if (left < 0) left = 0;
+      let top = coords.top - tooltipElem.offsetHeight - 5;
+      if (top < 0) {
+        top = coords.top + target.offsetHeight + 5;
+      }
+      tooltipElem.style.left = left + 'px';
+      tooltipElem.style.top = top + 'px';
+    };
+    document.onmouseout = function(e) {
+      if (tooltipElem) {
+        tooltipElem.remove();
+        tooltipElem = null;
+      }
+    };
+</script>
