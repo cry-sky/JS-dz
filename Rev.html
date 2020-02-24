@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Practice - Task list</title>
+  <!--Import Google Icon Font-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+  <!--Import bootstrap.css-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-4">
+    <div class="row">
+      <div class="jumbotron col-sm-6 offset-sm-3 py-3">
+
+        <h1 class="display-4 text-capitalize">Task list</h1>
+
+        <div class="card bg-warning mt-3">
+          <form id="form1">
+            <div class="card-header">
+              <label class="card-title" for="inp-add">New task</label>
+              <input id="inp-add" type="text" class="form-control form-control-sm" placeholder="New task" value="100 sit-ups">
+              <button id="btn-add" class="btn btn-primary btn-sm text-uppercase mt-2">add task</button>
+            </div>
+            <div class="card-body">
+              <h3 class="cart-title">Tasks</h3>
+              <label class="card-title" for="inp-filter">Filtering task</label>
+              <input id="inp-filter" type="text" class="form-control form-control-sm mb-2" placeholder="Filter task" data-value="100">
+              <template id="tmpl">
+                <li class="list-group-item d-flex justify-content-between align-items-center p-2 row mx-0">
+                  <span class="d-block col-10 ml-n3"></span>
+                  <button class="btn btn-danger btn-sm col-2"><i class="far fa-times-circle fa-lg"></i></button>
+                </li>
+              </template>
+              <ul class="list-group">
+                <!-- <li class="list-group-item d-flex justify-content-between align-items-center p-2">
+                  Task 1
+                  <button class="btn btn-danger btn-sm"><i class="far fa-times-circle fa-lg"></i></button>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center p-2">
+                  Task 1
+                  <button class="btn btn-danger btn-sm"><i class="far fa-times-circle fa-lg"></i></button>
+                </li> -->
+              </ul>
+              <button id="btn-clear" class="btn btn-danger btn-sm text-uppercase mt-3">clear all tasks</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    'use strict'
+    let addData = document.querySelector('#inp-add');
+    let newElem=document.querySelector('#tmpl');
+    let group=document.querySelector('.list-group');
+    let num=0;
+    
+    document.querySelector('#btn-add').onclick = function(event){
+      event.preventDefault();
+      newElem = tmpl.content.querySelector('li').cloneNode(true);
+      document.querySelector('.list-group').append(newElem);
+      newElem.querySelector('span').innerHTML=addData.value;
+      num++
+      localStorage.setItem('myKey '+[num], addData.value);
+    }
+    function remuveSingleTask(e){
+      e.preventDefault();
+      if (e.target.classList.contains('far') || e.target.classList.contains('btn-danger')) {
+        e.target.closest('li').remove();
+        let remloc=e.target.closest('li');
+        console.log(group.children[i].indexOf(remlock[0]));
+     } else {
+      return false;
+    }
+  }
+  group.addEventListener('click', remuveSingleTask);
+  
+  document.getElementById('inp-filter').onchange=function(){
+    for(let i=0;i<group.children.length;i++){
+      if(document.getElementById('inp-filter').value!==group.children[i].querySelector('span').innerHTML){
+        group.children[i].remove();
+      }
+    } 
+  }
+  let clear=document.querySelector('#btn-clear').onclick=function(){
+    localStorage.clear();
+  }
+  </script>
+</body>
+</html>
