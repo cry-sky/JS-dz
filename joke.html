@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="url" content="http://icndb.com/api/">
+	<title>Chuck Norris Joke Generator / ajax_008_data-from-an-external-api</title>
+	<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<form action="">
+			<div>
+				<label for="num">Num of jokes</label>
+				<input class="numjoke" type="number" name="num" id="num" value="7">
+			</div>
+			<div>
+				<button id="btn" class="btn btn-info get-jokes">Get jokes</button>
+			</div>
+		</form>
+		<ul class="jokes mt-3"></ul>
+	</div>
+	<script>
+		let xhr = new XMLHttpRequest()
+		xhr.open('GET', 'http://api.icndb.com/jokes/', true);
+		xhr.send();
+
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState != 4) return;
+			if (xhr.status != 200){
+				console.log('1');
+			} else {
+				console.log('2');
+				let=document.querySelector('#btn').onclick=function(e){
+					e.preventDefault();
+					let quote = JSON.parse(xhr.response);
+					let numjoke=+document.querySelector('.numjoke').value;
+					let joke=document.querySelector('.jokes');
+					
+					if(joke.querySelectorAll('li').length>(numjoke-1)){
+						while (joke.firstChild) {
+							joke.removeChild(joke.firstChild);
+						}
+						return
+					}		
+					console.log(quote['value']);
+					for(let i=0;i<numjoke;i++){
+						const min=0,max=574;
+						const j=Math.floor(Math.random()* (max-min*1)) + min;
+						console	.log(j);		
+						joke.innerHTML+=('<li>'+quote['value'][j].joke+ '</li>');					
+					}
+				}
+			} 
+		}
+	</script>
+</body>
+</html>
